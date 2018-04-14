@@ -3,3 +3,61 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.App-intro{
+  font-weight: bold;
+  margin: 4px;
+}
+
+.temperatureToggle {
+  font-size: 1em;
+  font-weight: bold;
+  padding: 4px;
+  border-width: 1.5px;
+  border-color: black;
+  border-radius: 0.5em;
+  background-color: white;
+}
+.temperatureToggle:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+}
+
+.countryToggle{
+  margin-top: 1em;
+}
+
+.countryToggleButton {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 6px;
+  border-width: 1.5px;
+  border-color: black;
+  border-radius: 0.5em;
+  background-color: white;
+  margin: 1em;
+  margin-top: 2px;
+}
+.countryToggleButton:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+}
+
+.addNewCountryButton {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 6px;
+  border-width: 1.5px;
+  border-color: black;
+  border-radius: 0.5em;
+  background-color: white;
+  margin: 1em;
+  margin-top: 2px;
+}
+.addNewCountryButton:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+}
