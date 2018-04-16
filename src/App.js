@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AppIntro from './components/AppIntro'
-import LocationSelection from './components/LocationSelection'
+import MainView from './components/MainView'
 import Unit from './enums/Unit'
 
 import './App.css';
@@ -12,19 +12,30 @@ class App extends Component {
         this.state = {
             locations: [
                 {
-                    name: 'Tokyo'
+                    name: 'Tokyo',
+                    lat: 35.658,
+                    long:139.733
                 },
                 {
-                    name: 'Helsinki'
+                    name: 'Helsinki',
+                    lat: 60.170,
+                    long: 24.949
                 },
                 {
-                    name: 'New York'
+                    name: 'New York',
+                    lat: 40.740,
+                    long: -73.994
+
                 },
                 {
-                    name: 'Amsterdam'
+                    name: 'Amsterdam',
+                    lat: 52.365,
+                    long: 4.904
                 },
                 {
-                    name: 'Dubai'
+                    name: 'Dubai',
+                    lat: 25.093,
+                    long: 55.156
                 }
             ],
             currentUnit: Unit.celsius
@@ -34,39 +45,41 @@ class App extends Component {
 
     }
 
-    componentDidMount() {
-        document.title = "Lämpö Stats"
-    }
-
     render() {
         return (
-            <div className="App">
+            <div className="container">
                 <header className="App-header">
-                    <h1 style={{fontSize: "4em"}}>
-                        Lämpö Statistics
-                    </h1>
+                    <h1 style={{fontSize: "4em", fontWeight: 'bold', marginLeft: '1em'}}>
+                        Lämpö Statistics</h1>
                 </header>
                 <AppIntro
                     locations={this.state.locations}
                     unit={this.state.currentUnit}
-                    toggleUnit={this.toggleUnit()}
-                />
-                <LocationSelection
-                    locations={this.state.locations}
-                />
+                    toggleUnit={this.toggleUnit()}/>
+                <MainView
+                    locations={this.state.locations}/>
             </div>
         );
     }
 
     toggleUnit = () => () => {
-        this.state.currentUnit === Unit.celsius ?
-            this.setState({currentUnit: Unit.fahrenheit}) :
-            this.setState({currentUnit: Unit.celsius})
+        switch (this.state.currentUnit) {
+            case Unit.celsius:
+                this.setState({currentUnit: Unit.fahrenheit})
+                break
+            case Unit.fahrenheit:
+                this.setState({currentUnit: Unit.kelvin})
+                break
+            case Unit.kelvin:
+                this.setState({currentUnit: Unit.celsius})
+                break
+            default:
+                break
+
+        }
     }
 
-    /*changeLocation = () => (locationName) => {
 
-    }*/
 
 }
 

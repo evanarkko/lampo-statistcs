@@ -1,4 +1,5 @@
 export default {
     celsius: 'Celsius',
-    fahrenheit: 'Fahrenheit'
+    fahrenheit: 'Fahrenheit',
+    kelvin: 'Kelvin'
 }

@@ -6,11 +6,15 @@ const Intro = ({locations, unit, toggleUnit}) => {
         .slice(0, locationNames.length-2)
         .map(loc => loc + ', ')
         .concat(locationNames[locationNames.length-2], ' or ', locationNames[locationNames.length-1])
-    const temperatureToggleButton = <button onClick={toggleUnit} className="temperatureToggle" title="change">{unit}</button>
+    const temperatureToggleButton =
+        <button onClick={toggleUnit} className="temperatureToggle" title="change">{unit}</button>
+
     return(
         <div className="App-intro">
-            If you currently reside in either {locString}, please enter the current temperature
-            in {temperatureToggleButton} for <i>strictly scientific</i> purposes.
+            <p>
+                If you currently reside in either {locString}, please enter the current temperature in<br/>
+                {temperatureToggleButton} for <i>strictly scientific</i> purposes.
+            </p>
         </div>
     )
 }
