@@ -57,7 +57,8 @@ class App extends Component {
                     unit={this.state.currentUnit}
                     toggleUnit={this.toggleUnit()}/>
                 <MainView
-                    locations={this.state.locations}/>
+                    locations={this.state.locations}
+                    tempUnit={this.state.currentUnit}/>
             </div>
         );
     }

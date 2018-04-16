@@ -10,7 +10,9 @@ const LocationView = ({location, tempUnit}) => {
                     <b>lat</b>: {location.lat}, <b>long</b>: {location.long}
                 </p>
             </div>
-            <div>latest temperature reading: {location.latest_temperature}</div>
+            <div>
+                <h1>latest temperature reading: 5{location.latest_temperature}°{tempUnit[0]}</h1>
+            </div>
             <div>
                 <h1>Last 24 hours</h1>
                 <p>high: {location.recent_high}</p>
@@ -32,7 +34,7 @@ const styleSheet={
         textAlign: 'left',
         borderTop: 'solid',
         borderLeft: 'solid',
-        borderRadius: 5,
+        borderRadius: '0.5em',
         borderTopWidth: 2,
         borderLeftWidth: 1,
         borderTopColor: 'darkred' /*change according to weather blue - red ?*/
