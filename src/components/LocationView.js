@@ -1,9 +1,12 @@
 import React from 'react'
+import DataForm from './DataForm'
+import UnitConversion from '../logic/UnitConversion'
 
-const LocationView = ({location, tempUnit}) => {
+
+const LocationView = ({location, unit}) => {
     return(
-        <div style={styleSheet.view}>
-            <div style={styleSheet.title}>{location.name}</div>
+        <div style={styleSheet.container}>
+            <div style={styleSheet.title}><u>{location.name}</u></div>
             <div>*current local time*</div>
             <div>
                 <p>
@@ -11,21 +14,22 @@ const LocationView = ({location, tempUnit}) => {
                 </p>
             </div>
             <div>
-                <h1>latest temperature reading: 5{location.latest_temperature}°{tempUnit[0]}</h1>
+                <h1>latest temperature reading: {UnitConversion.convertTo(location.latest, unit).toFixed(2)}°{unit[0]}</h1>
+                *time submitted*
             </div>
             <div>
                 <h1>Last 24 hours</h1>
-                <p>high: {location.recent_high}</p>
-                <p>low: {location.recent_low}</p>
-                <p>average: {location.recent_avg}</p>
+                <p>high: {UnitConversion.convertTo(location.recent.high, unit).toFixed(2)} °{unit[0]}</p>
+                <p>low: {UnitConversion.convertTo(location.recent.low, unit).toFixed(2)} °{unit[0]}</p>
+                <p>average: {UnitConversion.convertTo(location.recent.avg, unit).toFixed(2)} °{unit[0]}</p>
             </div>
-
+            <DataForm unit={unit}/>
         </div>
     )
 }
 
 const styleSheet={
-    view: {
+    container: {
         marginBottom: '0.5em',
         marginTop: '1em',
         padding:'1em',

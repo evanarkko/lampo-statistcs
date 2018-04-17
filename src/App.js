@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AppIntro from './components/AppIntro'
-import MainView from './components/MainView'
+import LocationList from './components/LocationList'
+import AdditionForm from './components/LocationAdditionForm'
 import Unit from './enums/Unit'
 
 import './App.css';
@@ -14,28 +15,59 @@ class App extends Component {
                 {
                     name: 'Tokyo',
                     lat: 35.658,
-                    long:139.733
-                },
+                    long:139.733,
+                    latest: 284.15,
+                    recent: {
+                        high: 286.15,
+                        low: 280.15,
+                        avg: 283.65
+                    }
+                }
+                ,
                 {
                     name: 'Helsinki',
                     lat: 60.170,
-                    long: 24.949
+                    long: 24.949,
+                    latest: 284.15,
+                    recent: {
+                        high: 286.15,
+                        low: 280.15,
+                        avg: 283.65
+                    }
                 },
                 {
                     name: 'New York',
                     lat: 40.740,
-                    long: -73.994
+                    long: -73.994,
+                    latest: 284.15,
+                    recent: {
+                        high: 286.15,
+                        low: 280.15,
+                        avg: 283.65
+                    }
 
                 },
                 {
                     name: 'Amsterdam',
                     lat: 52.365,
-                    long: 4.904
+                    long: 4.904,
+                    latest: 284.15,
+                    recent: {
+                        high: 286.15,
+                        low: 280.15,
+                        avg: 283.65
+                    }
                 },
                 {
                     name: 'Dubai',
                     lat: 25.093,
-                    long: 55.156
+                    long: 55.156,
+                    latest: 284.15,
+                    recent: {
+                        high: 286.15,
+                        low: 280.15,
+                        avg: 283.65
+                    }
                 }
             ],
             currentUnit: Unit.celsius
@@ -56,9 +88,10 @@ class App extends Component {
                     locations={this.state.locations}
                     unit={this.state.currentUnit}
                     toggleUnit={this.toggleUnit()}/>
-                <MainView
+                <LocationList
                     locations={this.state.locations}
-                    tempUnit={this.state.currentUnit}/>
+                    unit={this.state.currentUnit}/>
+                <AdditionForm/>
             </div>
         );
     }
