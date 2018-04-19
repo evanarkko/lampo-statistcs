@@ -18,16 +18,16 @@ class AdditionForm extends React.Component {
             <div style={styleSheet.container}>
                 <form onSubmit={this.submitNew()}>
                     <div>
-                        City <input type="text" style={styleSheet.input} onChange={this.changeName()}/>
+                        Address, City or Country <input type="text" style={styleSheet.input} onChange={this.changeName()}/>
                     </div>
-                    <div style={styleSheet.or}>OR</div>
+                    <div style={styleSheet.or}><i>OR</i></div>
                     <div>
                         lat <input type="text" style={{...styleSheet.input, ...styleSheet.latlon}}
                                    onChange={this.changeLat()}/>&nbsp;
                         lon <input type="text" style={{...styleSheet.input, ...styleSheet.latlon}}
                                    onChange={this.changeLong()}/>
                     </div>
-                    <button type="submit" style={styleSheet.button}>Add Location</button>
+                    <button type="submit" style={styleSheet.button} className='blackHover'>Add Location</button>
                 </form>
             </div>
         )

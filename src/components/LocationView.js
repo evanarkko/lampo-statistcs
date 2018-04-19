@@ -4,9 +4,6 @@ import UnitConversion from '../logic/UnitConversion'
 
 
 const LocationView = ({location, unit, addReading}) => {
-    if(location.name === 'Tokyo') {
-        console.log(UnitConversion.convertTo(location.latest.temp, unit))
-    }
     return(
         <div style={styleSheet.container}>
             <div style={styleSheet.title}><u>{location.name}</u></div>
@@ -17,11 +14,12 @@ const LocationView = ({location, unit, addReading}) => {
                 </p>
             </div>
             <div>
-                <h1>latest temperature reading: {UnitConversion.convertTo(location.latest.temp, unit).toFixed(2)}°{unit[0]}</h1>
-                *time submitted*
+                <h2>latest temperature reading</h2>
+                <p>{UnitConversion.convertTo(location.latest.temp, unit).toFixed(2)}°{unit[0]}</p>
+                <p>*time submitted*</p>
             </div>
             <div>
-                <h1>Last 24 hours</h1>
+                <h2>Last 24 hours</h2>
                 <p>high: {UnitConversion.convertTo(location.recent.high, unit).toFixed(2)} °{unit[0]}</p>
                 <p>low: {UnitConversion.convertTo(location.recent.low, unit).toFixed(2)} °{unit[0]}</p>
                 <p>average: {UnitConversion.convertTo(location.recent.avg, unit).toFixed(2)} °{unit[0]}</p>
@@ -37,18 +35,19 @@ const LocationView = ({location, unit, addReading}) => {
 
 const styleSheet={
     container: {
-        marginBottom: '0.5em',
+        display: 'inline-block',
         marginTop: '1em',
         padding:'1em',
-        fontSize: '1.5em',
-        fontWeight: '70',
+        fontSize: '1em',
         textAlign: 'left',
         borderTop: 'solid',
         borderLeft: 'solid',
         borderRadius: '0.5em',
         borderTopWidth: 2,
         borderLeftWidth: 1,
-        borderTopColor: 'darkred' /*change according to weather blue - red ?*/
+        fontFamily: 'Arial',
+        borderTopColor: 'purple' /*change according to weather blue - red ?*/
+
     },
     title:{
         fontSize:'2em',
