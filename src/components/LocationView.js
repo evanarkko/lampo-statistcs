@@ -3,7 +3,10 @@ import DataForm from './DataForm'
 import UnitConversion from '../logic/UnitConversion'
 
 
-const LocationView = ({location, unit}) => {
+const LocationView = ({location, unit, addReading}) => {
+    if(location.name === 'Tokyo') {
+        console.log(UnitConversion.convertTo(location.latest.temp, unit))
+    }
     return(
         <div style={styleSheet.container}>
             <div style={styleSheet.title}><u>{location.name}</u></div>
@@ -14,7 +17,7 @@ const LocationView = ({location, unit}) => {
                 </p>
             </div>
             <div>
-                <h1>latest temperature reading: {UnitConversion.convertTo(location.latest, unit).toFixed(2)}°{unit[0]}</h1>
+                <h1>latest temperature reading: {UnitConversion.convertTo(location.latest.temp, unit).toFixed(2)}°{unit[0]}</h1>
                 *time submitted*
             </div>
             <div>
@@ -23,7 +26,11 @@ const LocationView = ({location, unit}) => {
                 <p>low: {UnitConversion.convertTo(location.recent.low, unit).toFixed(2)} °{unit[0]}</p>
                 <p>average: {UnitConversion.convertTo(location.recent.avg, unit).toFixed(2)} °{unit[0]}</p>
             </div>
-            <DataForm unit={unit}/>
+            <DataForm
+                location={location}
+                unit={unit}
+                addReading={addReading} /*()?*/
+            />
         </div>
     )
 }

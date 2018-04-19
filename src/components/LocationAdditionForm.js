@@ -1,21 +1,64 @@
 import React from 'react'
 
-const AdditionForm = ({addNew, changeName, changeLat, changeLong}) => {
-    return (
-        <div style={styleSheet.container}>
-            <form onSubmit={addNew}>
-                <div>
-                    City <input type="text" style={styleSheet.input} onChange={changeName}/>
-                </div>
-                <div style={styleSheet.or}>OR</div>
-                <div>
-                    lat <input type="text" style={{...styleSheet.input, ...styleSheet.latlon}} onChange={changeLat}/>&nbsp;
-                    lon <input type="text" style={{...styleSheet.input, ...styleSheet.latlon}} onChange={changeLong}/>
-                </div>
-                <button type="submit" style={styleSheet.button}>Add Location</button>
-            </form>
-        </div>
-    )
+class AdditionForm extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            newLocation: {
+                name: null,
+                lat: null,
+                long: null
+            }
+        }
+
+    }
+
+    render() {
+        return (
+            <div style={styleSheet.container}>
+                <form onSubmit={this.submitNew()}>
+                    <div>
+                        City <input type="text" style={styleSheet.input} onChange={this.changeName()}/>
+                    </div>
+                    <div style={styleSheet.or}>OR</div>
+                    <div>
+                        lat <input type="text" style={{...styleSheet.input, ...styleSheet.latlon}}
+                                   onChange={this.changeLat()}/>&nbsp;
+                        lon <input type="text" style={{...styleSheet.input, ...styleSheet.latlon}}
+                                   onChange={this.changeLong()}/>
+                    </div>
+                    <button type="submit" style={styleSheet.button}>Add Location</button>
+                </form>
+            </div>
+        )
+    }
+
+    submitNew = () => (event) => {
+        event.preventDefault()
+        this.props.addNew(
+            this.state.newLocation.name,
+            this.state.newLocation.lat,
+            this.state.newLocation.long)
+    }
+
+    changeName = () => (event) => {
+        this.changeArbitrary('name', event.target.value)
+    }
+
+    changeLat = () => (event) => {
+        this.changeArbitrary('lat', event.target.value)
+    }
+
+    changeLong = () => (event) => {
+        this.changeArbitrary('long', event.target.value)
+    }
+
+    changeArbitrary = (valueType, value) => {
+        let location = this.state.newLocation
+        location[valueType] = value
+        this.setState({newLocation: location})
+    }
+
 }
 
 const styleSheet = {
@@ -30,7 +73,7 @@ const styleSheet = {
         borderRadius: '0.5em',
         borderWidth: 1,
         borderTopWidth: 2,
-        borderTopColor: 'darkred' /*change according to weather blue - red ?*/
+        borderTopColor: 'darkred' /*change according to weather blue  - yellow - red ?*/
     },
     input: {
         border: 'solid',

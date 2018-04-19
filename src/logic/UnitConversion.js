@@ -12,7 +12,7 @@ const convertFrom = (value, unit) => {
         case Unit.fahrenheit:
             return (value + 459.67) / (9.0/5.0)
         case Unit.kelvin:
-            return value
+            return parseFloat(value)
         default:
             return null
     }
@@ -25,7 +25,7 @@ const convertTo = (value, unit) => {
         case Unit.fahrenheit:
             return value * (9.0/5.0) - 459.67
         case Unit.kelvin:
-            return value
+            return parseFloat(value)
         default:
             return null
     }
