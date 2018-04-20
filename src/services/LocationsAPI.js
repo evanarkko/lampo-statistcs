@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/api/locations'
+const baseUrl = '/api/locations'
 
 const getAll = async () => {
     const result = await axios.get(baseUrl)
@@ -8,4 +8,8 @@ const getAll = async () => {
     return result.data
 }
 
-export default {getAll}
+const saveOne = (name, lat, long) => {
+    axios.post(baseUrl, {name: name, lat: lat, long: long})
+}
+
+export default {getAll, saveOne}

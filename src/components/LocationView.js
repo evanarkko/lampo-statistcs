@@ -4,6 +4,29 @@ import UnitConversion from '../logic/UnitConversion'
 
 
 const LocationView = ({location, unit, addReading}) => {
+    let latestInfo = location.latest ?
+        <div>
+            <p>{UnitConversion.convertTo(location.latest.temp, unit).toFixed(2)}°{unit[0]}</p>
+            <p>{location.latest.added || '*time not availalle*'}</p>
+        </div> :
+        <div style={{color: 'pink'}}>
+            <p>no</p>
+            <p>readings</p>
+        </div>
+    let recentInfo = location.recent ?
+        <div>
+            <div>
+                <p>high: {UnitConversion.convertTo(location.recent.high, unit).toFixed(2)} °{unit[0]}</p>
+                <p>low: {UnitConversion.convertTo(location.recent.low, unit).toFixed(2)} °{unit[0]}</p>
+                <p>average: {UnitConversion.convertTo(location.recent.avg, unit).toFixed(2)} °{unit[0]}</p>
+            </div>
+        </div> :
+        <div style={{color: 'pink'}}>
+            <p> no</p>
+            <p>recent</p>
+            <p>data</p>
+        </div>
+
     return(
         <div style={styleSheet.container}>
             <div style={styleSheet.title}><u>{location.name}</u></div>
@@ -15,15 +38,11 @@ const LocationView = ({location, unit, addReading}) => {
             </div>
             <div>
                 <h2>latest temperature reading</h2>
-                <p>{UnitConversion.convertTo(location.latest.temp, unit).toFixed(2)}°{unit[0]}</p>
-                <p>*time submitted*</p>
+                <div style={styleSheet.minHeight}>{latestInfo}</div>
             </div>
-            <div>
-                <h2>Last 24 hours</h2>
-                <p>high: {UnitConversion.convertTo(location.recent.high, unit).toFixed(2)} °{unit[0]}</p>
-                <p>low: {UnitConversion.convertTo(location.recent.low, unit).toFixed(2)} °{unit[0]}</p>
-                <p>average: {UnitConversion.convertTo(location.recent.avg, unit).toFixed(2)} °{unit[0]}</p>
-            </div>
+            <h2>Last 24 hours</h2>
+            <div style={styleSheet.minHeight}>{recentInfo}</div>
+
             <DataForm
                 location={location}
                 unit={unit}
@@ -54,8 +73,8 @@ const styleSheet={
         fontWeight: 'bold',
         marginBottom: 4
     },
-    coordinates:{
-
+    minHeight:{
+       maxHeight: '8em'
     }
 }
 

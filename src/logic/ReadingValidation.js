@@ -15,7 +15,7 @@ const validateAsRealTemperature = (reading, unit) => {
     switch (unit) {
         case Unit.celsius:
             return withinBounds(
-                UnitConversion.convertTo(kelvinLower, unit),
+                UnitConversion.convertTo(g, unit),
                 reading,
                 UnitConversion.convertTo(kelvinUpper, unit))
         case Unit.fahrenheit:

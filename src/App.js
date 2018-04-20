@@ -5,6 +5,7 @@ import AdditionForm from './components/LocationAdditionForm'
 import Unit from './enums/Unit'
 import GoogleAPI from './services/GoogleMapsAPI'
 import LocationsAPI from './services/LocationsAPI'
+import ReadingsAPI from './services/ReadingsAPI'
 import UnitConversion from './logic/UnitConversion'
 
 import './App.css';
@@ -21,7 +22,26 @@ class App extends Component {
 
     async componentWillMount(){
         const data = await LocationsAPI.getAll()
-        this.setState({locations: data})
+
+        let structs = []
+        for (let location of data) {
+            let struct = await ReadingsAPI.getStructuredByName(location.name)
+            structs = structs.concat(struct)
+        }
+
+        let locations = []
+        for (let i = 0; i < data.length; i++){
+            locations = locations
+                .concat({
+                    name: data[i].name,
+                    lat: data[i].lat,
+                    long: data[i].long,
+                    latest: structs[i].latest,
+                    recent: structs[i].recent
+                })
+        }
+
+        this.setState({locations: locations})
     }
 
     render() {
@@ -70,33 +90,24 @@ class App extends Component {
 
         const asKelvin = UnitConversion.convertFrom(reading, this.state.currentUnit).toFixed(2)
 
+        ReadingsAPI.saveOne(asKelvin, locationName)
+
         let locations = this.state.locations
         locations.forEach(loc => {
             if(loc.name === locationName){
+                if(!loc.latest) loc.latest = {}
                 loc.latest.temp = asKelvin
+                loc.latest.added = new Date().toDateString()
             }
         })
         this.setState({locations})
-        /* in locationService
-        ....http send to server
-        * ..receive new version with updated fields as response
-        * update fields*/
     }
 
     addNewLocation = () => async (name, lat, long) => {
         let newLocation = {
             name: '',
             lat: 0,
-            long: 0,
-            latest: {
-                temp: 273.15,
-                added: ''
-            },
-            recent: {
-                high: 0,
-                low: 0,
-                avg: 0
-            }
+            long: 0
         }
 
         if (!name) {
@@ -125,9 +136,10 @@ class App extends Component {
             }
         }
 
+        LocationsAPI.saveOne(newLocation.name, newLocation.lat, newLocation.long)
         this.setState({locations: this.state.locations.concat(newLocation)})
-        /*Save to server*/
     }
+
 
 
 }
