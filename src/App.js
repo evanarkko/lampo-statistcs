@@ -97,7 +97,20 @@ class App extends Component {
             if(loc.name === locationName){
                 if(!loc.latest) loc.latest = {}
                 loc.latest.temp = asKelvin
-                loc.latest.added = new Date().toDateString()
+                loc.latest.added = new Date().toUTCString()
+                if(!loc.recent){
+                    loc.recent = {
+                        high: asKelvin,
+                        low: asKelvin,
+                        avg: asKelvin
+                    }
+                }else{
+                    if(loc.recent.high && loc.recent.high < asKelvin){
+                        loc.recent.high = asKelvin
+                    }else if(loc.recent.low && loc.recent.low > asKelvin){
+                        loc.recent.low = asKelvin
+                    }
+                }
             }
         })
         this.setState({locations})

@@ -7,7 +7,7 @@ const LocationView = ({location, unit, addReading}) => {
     let latestInfo = location.latest ?
         <div>
             <p>{UnitConversion.convertTo(location.latest.temp, unit).toFixed(2)}°{unit[0]}</p>
-            <p>{location.latest.added || '*time not availalle*'}</p>
+            <p>{new Date(location.latest.added).toUTCString() || '*time not availalle*'}</p>
         </div> :
         <div style={{color: 'pink'}}>
             <p>no</p>
