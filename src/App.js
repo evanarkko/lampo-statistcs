@@ -23,13 +23,15 @@ class App extends Component {
     async componentWillMount(){
         const data = await LocationsAPI.getAll()
 
-        let structs = []
+        let structPromises = []
         for (let location of data) {
-            let struct = await ReadingsAPI.getStructuredByName(location.name)
-            structs = structs.concat(struct)
+            let structPromise = ReadingsAPI.getStructuredByName(location.name)
+            structPromises = structPromises.concat(structPromise)
         }
+        const structs = await Promise.all(structPromises)
 
         let locations = []
+
         for (let i = 0; i < data.length; i++){
             locations = locations
                 .concat({
